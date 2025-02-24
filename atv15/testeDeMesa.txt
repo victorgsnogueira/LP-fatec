@@ -1,0 +1,17 @@
+# Atividade 4 - Teste de Mesa
+
+## Dados Utilizados
+
+teste1:
+horas mes:160
+salario por hora: 12
+
+teste2:
+horas mes:161
+salario por hora: 10
+
+## Dados do Teste
+
+resposta1 = 1920,00
+
+resposta 2 = 1615,00

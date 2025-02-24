@@ -1,0 +1,9 @@
+# Atividade 4 - Teste de Mesa
+
+## Dados Utilizados
+
+graus F = 212
+
+## Dados do Teste
+
+Graus C = 100.0

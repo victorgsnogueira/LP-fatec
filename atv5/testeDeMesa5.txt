@@ -1,0 +1,13 @@
+# Atividade 4 - Teste de Mesa
+
+## Dados Utilizados
+
+Salario fixo = 5000
+Comissao fixa= 100
+Carros vendidos = 2
+Valor carro 1 = 1000
+Valor carro 2 = 1500
+
+## Dados do Teste
+
+salario do mes = 5325.0

@@ -1,0 +1,17 @@
+# Atividade 4 - Teste de Mesa
+
+## Dados Utilizados
+
+teste1:
+valor 1 = 1
+valor 2 = 5
+
+teste2:
+valor 1 = 20
+valor 2 = 22
+
+## Dados do Teste
+
+resposta1 = 4 horas
+
+resposta2 = 2 horas

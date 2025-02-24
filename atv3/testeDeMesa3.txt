@@ -1,0 +1,10 @@
+# Atividade 2 - Teste de Mesa
+
+## Dados Utilizados
+
+salario = 1000;
+porcentagem Reajuste = 5
+
+## Dados do Teste
+
+salario Novo = 1050,00

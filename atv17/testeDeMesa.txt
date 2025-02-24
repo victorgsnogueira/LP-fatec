@@ -1,0 +1,14 @@
+# Atividade 4 - Teste de Mesa
+
+## Dados Utilizados
+
+P1 = 10
+E1 = 5
+E2 = 3
+API = 7
+SUB = 4
+X = 1
+
+## Dados do Teste
+
+NOTA = 9.5

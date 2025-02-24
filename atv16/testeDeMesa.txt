@@ -1,0 +1,13 @@
+# Atividade 4 - Teste de Mesa
+
+## Dados Utilizados
+
+janeiro = 15000
+fevereiro = 23000
+marco = 17000
+
+## Dados do Teste
+
+total = 55000
+
+media = 18333,33

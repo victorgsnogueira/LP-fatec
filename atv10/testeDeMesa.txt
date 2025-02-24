@@ -1,0 +1,19 @@
+# Atividade 4 - Teste de Mesa
+
+## Dados Utilizados
+
+1 teste =
+nota 1 avaliação= 6
+nota 2 avaliação = 6
+
+2 teste =
+nota 1 avaliação = 3
+nota 2 avaliação = 7
+
+## Dados do Teste
+
+
+
+resposta1: Média: 6.0 Aluno Aprovado!
+
+resposta2:Média: 5.0 Aluno Reprovado!

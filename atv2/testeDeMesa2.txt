@@ -1,0 +1,14 @@
+# Atividade 2 - Teste de Mesa
+
+## Dados Utilizados
+
+branco = 5
+nulo = 5
+validos = 5
+
+## Dados do Teste
+
+- total: 15
+- branco: 33,33
+- nulo: 33,33
+- validos: 33,33

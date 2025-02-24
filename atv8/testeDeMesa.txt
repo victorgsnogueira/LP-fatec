@@ -1,0 +1,15 @@
+# Atividade 4 - Teste de Mesa
+
+## Dados Utilizados
+
+valor 1 = 11
+valor 2 = 2
+valor 3 = 10
+
+## Dados do Teste
+
+resposta1 = maior que 10
+
+resposta 2 = menor que 10
+
+resposta 3 = menor que 10

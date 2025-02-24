@@ -1,0 +1,17 @@
+# Atividade 4 - Teste de Mesa
+
+## Dados Utilizados
+
+teste1:
+valor 1 = 11
+valor 2 = 2
+
+teste2:
+valor 1 = 1
+valor 2 = 3
+
+## Dados do Teste
+
+resposta1 = 11 é maior
+
+resposta2 = 3 é maior

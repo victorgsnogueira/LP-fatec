@@ -1,0 +1,15 @@
+# Atividade 4 - Teste de Mesa
+
+## Dados Utilizados
+
+teste1:
+maças compradas = 13
+
+teste2:
+maças compradas = 10
+
+## Dados do Teste
+
+resposta1 = 13,00
+
+resposta 2 = 13,00
