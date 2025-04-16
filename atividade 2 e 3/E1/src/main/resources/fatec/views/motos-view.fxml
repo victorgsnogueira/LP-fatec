@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="615.0" prefWidth="903.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fatec.controllers.MotosController">
+   <children>
+      <ImageView fitHeight="350.0" fitWidth="391.0" layoutX="256.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="/fatec/images/motos.jpg" />
+         </image></ImageView>
+      <HBox alignment="CENTER" layoutX="59.0" layoutY="354.0" prefHeight="100.0" prefWidth="785.0">
+         <children>
+            <TextField fx:id="txtMarca" promptText="Marca">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </TextField>
+            <TextField fx:id="txtModelo" promptText="Modelo">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </TextField>
+            <TextField fx:id="txtAno" promptText="Ano">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </TextField>
+            <TextField fx:id="txtPeso" promptText="Peso">
+               <opaqueInsets>
+                  <Insets right="20.0" />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </TextField>
+            <CheckBox fx:id="chkCarenagem" mnemonicParsing="false" prefHeight="17.0" prefWidth="112.0" text="Carenagem?">
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </CheckBox>
+            <Button fx:id="btnCriar" mnemonicParsing="false" onAction="#CriarOnAction" prefHeight="48.0" prefWidth="117.0" text="Criar" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="59.0" layoutY="481.0" prefHeight="100.0" prefWidth="785.0">
+         <children>
+            <Button fx:id="btnCadastro" mnemonicParsing="false" onAction="#CadastroOnAction" prefHeight="48.0" prefWidth="117.0" text="Ver Cadastro">
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="btnAcelerar" mnemonicParsing="false" onAction="#AcelerarOnAction" prefHeight="48.0" prefWidth="117.0" text="Acelerar">
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="btnFrear" mnemonicParsing="false" onAction="#FrearOnAction" prefHeight="48.0" prefWidth="117.0" text="Frear">
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="btnEmpinar" mnemonicParsing="false" onAction="#EmpinarOnAction" prefHeight="48.0" prefWidth="117.0" text="Empinar">
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+      <Button fx:id="btnVoltar" layoutX="59.0" layoutY="40.0" mnemonicParsing="false" onAction="#VoltarOnAction" prefHeight="48.0" prefWidth="88.0" text="Voltar" />
+   </children>
+</AnchorPane>
