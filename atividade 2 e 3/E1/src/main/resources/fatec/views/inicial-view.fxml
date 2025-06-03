@@ -3,30 +3,83 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="213.0" prefWidth="882.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fatec.controllers.InicialController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="882.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fatec.controllers.InicialController">
    <children>
-      <Button fx:id="btnFelinos" layoutX="44.0" layoutY="65.0" mnemonicParsing="false" onAction="#FelinosOnAction" prefHeight="83.0" prefWidth="135.0" text="Felinos">
+      <Label layoutX="44.0" layoutY="14.0" text="Sistema de Cadastro" textFill="BLACK">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+
+      <Label layoutX="44.0" layoutY="44.0" text="Animais" textFill="BLACK">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+
+      <Button fx:id="btnFelinos" layoutX="44.0" layoutY="74.0" mnemonicParsing="false" onAction="#FelinosOnAction" prefHeight="83.0" prefWidth="135.0" text="Felinos">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="btnAquaticos" layoutX="209.0" layoutY="65.0" mnemonicParsing="false" onAction="#AquaticosOnAction" prefHeight="83.0" prefWidth="135.0" text="Animais Aquáticos">
+      <Button fx:id="btnAquaticos" layoutX="209.0" layoutY="74.0" mnemonicParsing="false" onAction="#AquaticosOnAction" prefHeight="83.0" prefWidth="135.0" text="Animais Aquáticos">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="btnCaminhoes" layoutX="704.0" layoutY="65.0" mnemonicParsing="false" onAction="#CaminhoesOnAction" prefHeight="83.0" prefWidth="135.0" text="Caminhões">
+      <Button fx:id="btnAves" layoutX="374.0" layoutY="74.0" mnemonicParsing="false" onAction="#AvesOnAction" prefHeight="83.0" prefWidth="135.0" text="Aves">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="btnMotos" layoutX="539.0" layoutY="65.0" mnemonicParsing="false" onAction="#MotosOnAction" prefHeight="83.0" prefWidth="135.0" text="Motos">
+      <Button fx:id="btnRepteis" layoutX="539.0" layoutY="74.0" mnemonicParsing="false" onAction="#RepteisOnAction" prefHeight="83.0" prefWidth="135.0" text="Répteis">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="btnCarros" layoutX="374.0" layoutY="65.0" mnemonicParsing="false" onAction="#CarrosOnAction" prefHeight="83.0" prefWidth="135.0" text="Carros">
+      <Button fx:id="btnMamiferos" layoutX="704.0" layoutY="74.0" mnemonicParsing="false" onAction="#MamiferosOnAction" prefHeight="83.0" prefWidth="135.0" text="Mamíferos">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+
+      <Label layoutX="44.0" layoutY="177.0" text="Veículos" textFill="BLACK">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+
+      <Button fx:id="btnCarros" layoutX="44.0" layoutY="207.0" mnemonicParsing="false" onAction="#CarrosOnAction" prefHeight="83.0" prefWidth="135.0" text="Carros">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnMotos" layoutX="209.0" layoutY="207.0" mnemonicParsing="false" onAction="#MotosOnAction" prefHeight="83.0" prefWidth="135.0" text="Motos">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnCaminhoes" layoutX="374.0" layoutY="207.0" mnemonicParsing="false" onAction="#CaminhoesOnAction" prefHeight="83.0" prefWidth="135.0" text="Caminhões">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnBicicletas" layoutX="539.0" layoutY="207.0" mnemonicParsing="false" onAction="#BicicletasOnAction" prefHeight="83.0" prefWidth="135.0" text="Bicicletas">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnAvioes" layoutX="704.0" layoutY="207.0" mnemonicParsing="false" onAction="#AvioesOnAction" prefHeight="83.0" prefWidth="135.0" text="Aviões">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+
+      <Button fx:id="btnSair" layoutX="374.0" layoutY="320.0" mnemonicParsing="false" onAction="#SairOnAction" prefHeight="40.0" prefWidth="135.0" text="Sair">
          <font>
             <Font size="14.0" />
          </font>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox alignment="CENTER" spacing="10.0" xmlns:fx="http://javafx.com/fxml" fx:controller="fatec.controllers.AvioesController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+
+    <Label text="Cadastro de Avião" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+
+    <GridPane vgap="10" hgap="10">
+        <Label text="Marca:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <TextField fx:id="txtMarca" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+        <Label text="Modelo:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <TextField fx:id="txtModelo" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+        <Label text="Ano:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <TextField fx:id="txtAno" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+        <Label text="Peso:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <TextField fx:id="txtPeso" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+        <Label text="Número de Motores:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+        <TextField fx:id="txtMotores" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+        <Label text="Envergadura:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+        <TextField fx:id="txtEnvergadura" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+
+        <CheckBox fx:id="chkTurbina" text="Tem Turbina" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+    </GridPane>
+
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Criar" onAction="#CriarOnAction" fx:id="btnCriar" />
+        <Button text="Cadastro" onAction="#CadastroOnAction" fx:id="btnCadastro" />
+    </HBox>
+
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Acelerar" onAction="#AcelerarOnAction" fx:id="btnAcelerar" />
+        <Button text="Frear" onAction="#FrearOnAction" fx:id="btnFrear" />
+        <Button text="Decolar" onAction="#DecolarOnAction" fx:id="btnDecolar" />
+        <Button text="Pousar" onAction="#PousarOnAction" fx:id="btnPousar" />
+    </HBox>
+
+    <Button text="Voltar" onAction="#VoltarOnAction" fx:id="btnVoltar" />
+</VBox> 
