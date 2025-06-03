@@ -29,8 +29,8 @@ CREATE TABLE IF NOT EXISTS mamiferos (
     nome VARCHAR(100) NOT NULL,
     idade INT NOT NULL,
     peso DOUBLE NOT NULL,
-    gestacao INT NOT NULL,
-    amamenta BOOLEAN NOT NULL,
+    tem_pelos BOOLEAN NOT NULL,
+    tipo_alimentacao VARCHAR(50) NOT NULL,
     data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -110,3 +110,5 @@ CREATE TABLE IF NOT EXISTS motos (
     cilindrada INT NOT NULL,
     data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ); 
+
+select * from mamiferos;
