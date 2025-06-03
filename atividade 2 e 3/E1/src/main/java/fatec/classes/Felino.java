@@ -1,19 +1,19 @@
 package fatec.classes;
 
 public class Felino extends Animal {
-    private boolean gostaDeDormir;
+    private double tamanhoGarras;
 
-    public Felino(String nome, int idade, double peso, boolean gostaDeDormir) {
+    public Felino(String nome, int idade, double peso, double tamanhoGarras) {
         super(nome, idade, peso);
-        this.gostaDeDormir = gostaDeDormir;
+        this.tamanhoGarras = tamanhoGarras;
     }
 
-    public boolean isGostaDeDormir() {
-        return gostaDeDormir;
+    public double getTamanhoGarras() {
+        return tamanhoGarras;
     }
 
-    public void setGostaDeDormir(boolean gostaDeDormir) {
-        this.gostaDeDormir = gostaDeDormir;
+    public void setTamanhoGarras(double tamanhoGarras) {
+        this.tamanhoGarras = tamanhoGarras;
     }
 
     @Override
@@ -21,11 +21,11 @@ public class Felino extends Animal {
         return (getNome() + " está miando.");
     }
 
-    public String EscalarArvore() {
-        return (getNome() + " está escalando uma árvore.");
+    public String SubirArvore() {
+        return (getNome() + " está subindo em uma árvore.");
     }
 
-    public String CacaPresas() {
+    public String Cacar() {
         return (getNome() + " está caçando presas.");
     }
 }

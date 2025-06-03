@@ -1,21 +1,14 @@
 package fatec.classes;
 
 public class Ave extends Animal {
-    private boolean podeVoar;
     private double envergadura;
+    private boolean voa;
+    private int id;
 
-    public Ave(String nome, int idade, double peso, boolean podeVoar, double envergadura) {
+    public Ave(String nome, int idade, double peso, double envergadura, boolean voa) {
         super(nome, idade, peso);
-        this.podeVoar = podeVoar;
         this.envergadura = envergadura;
-    }
-
-    public boolean isPodeVoar() {
-        return podeVoar;
-    }
-
-    public void setPodeVoar(boolean podeVoar) {
-        this.podeVoar = podeVoar;
+        this.voa = voa;
     }
 
     public double getEnvergadura() {
@@ -26,19 +19,35 @@ public class Ave extends Animal {
         this.envergadura = envergadura;
     }
 
+    public boolean isVoa() {
+        return voa;
+    }
+
+    public void setVoa(boolean voa) {
+        this.voa = voa;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public String FazerSom() {
-        return (getNome() + " está cantando.");
+        return "A ave " + getNome() + " está cantando!";
     }
 
     public String Voar() {
-        if (podeVoar) {
-            return (getNome() + " está voando.");
+        if (voa) {
+            return "A ave " + getNome() + " está voando!";
         }
-        return (getNome() + " não pode voar.");
+        return "A ave " + getNome() + " não pode voar!";
     }
 
-    public String ConstruirNinho() {
-        return (getNome() + " está construindo um ninho.");
+    public String FazerNinho() {
+        return "A ave " + getNome() + " está construindo seu ninho!";
     }
 } 

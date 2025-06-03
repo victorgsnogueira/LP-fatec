@@ -1,21 +1,21 @@
 package fatec.classes;
 
 public class Aviao extends Veiculo {
-    private int numeroMotores;
+    private int numMotores;
     private double envergadura;
 
-    public Aviao(String marca, String modelo, int ano, double peso, int numeroMotores, double envergadura) {
+    public Aviao(String marca, String modelo, int ano, double peso, int numMotores, double envergadura) {
         super(marca, modelo, ano, peso);
-        this.numeroMotores = numeroMotores;
+        this.numMotores = numMotores;
         this.envergadura = envergadura;
     }
 
-    public int getNumeroMotores() {
-        return numeroMotores;
+    public int getNumMotores() {
+        return numMotores;
     }
 
-    public void setNumeroMotores(int numeroMotores) {
-        this.numeroMotores = numeroMotores;
+    public void setNumMotores(int numMotores) {
+        this.numMotores = numMotores;
     }
 
     public double getEnvergadura() {

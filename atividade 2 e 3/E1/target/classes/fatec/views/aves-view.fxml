@@ -24,19 +24,32 @@
         <Label text="Envergadura:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
         <TextField fx:id="txtEnvergadura" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
-        <CheckBox fx:id="chkPodeVoar" text="Pode Voar" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <CheckBox fx:id="chkVoa" text="Pode Voar" GridPane.columnIndex="1" GridPane.rowIndex="4" />
     </GridPane>
 
     <HBox spacing="10" alignment="CENTER">
-        <Button text="Criar" onAction="#CriarOnAction" fx:id="btnCriar" />
-        <Button text="Cadastro" onAction="#CadastroOnAction" fx:id="btnCadastro" />
+        <Button fx:id="btnCriar" onAction="#CriarOnAction" text="Criar" />
+        <Button fx:id="btnAtualizar" onAction="#AtualizarOnAction" text="Atualizar" />
+        <Button fx:id="btnExcluir" onAction="#ExcluirOnAction" text="Excluir" />
+        <Button fx:id="btnListar" onAction="#ListarOnAction" text="Listar" />
     </HBox>
 
     <HBox spacing="10" alignment="CENTER">
         <Button text="Fazer Som" onAction="#SomOnAction" fx:id="btnSom" />
         <Button text="Voar" onAction="#VoarOnAction" fx:id="btnVoar" />
-        <Button text="Construir Ninho" onAction="#NinhoOnAction" fx:id="btnNinho" />
+        <Button text="Fazer Ninho" onAction="#FazerNinhoOnAction" fx:id="btnFazerNinho" />
     </HBox>
+
+    <TableView fx:id="tblAves" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colId" text="ID" prefWidth="50" />
+            <TableColumn fx:id="colNome" text="Nome" prefWidth="150" />
+            <TableColumn fx:id="colIdade" text="Idade" prefWidth="100" />
+            <TableColumn fx:id="colPeso" text="Peso" prefWidth="100" />
+            <TableColumn fx:id="colEnvergadura" text="Envergadura" prefWidth="100" />
+            <TableColumn fx:id="colVoa" text="Pode Voar" prefWidth="100" />
+        </columns>
+    </TableView>
 
     <Button text="Voltar" onAction="#VoltarOnAction" fx:id="btnVoltar" />
 </VBox> 

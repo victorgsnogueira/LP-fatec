@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 
-<VBox alignment="CENTER" spacing="10.0" xmlns:fx="http://javafx.com/fxml" fx:controller="fatec.controllers.BicicletasController">
+<VBox alignment="CENTER" spacing="10.0" prefWidth="700.0" prefHeight="600.0" xmlns:fx="http://javafx.com/fxml" fx:controller="fatec.controllers.BicicletasController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
@@ -25,14 +25,17 @@
         <TextField fx:id="txtPeso" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
         <Label text="Número de Marchas:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-        <TextField fx:id="txtMarchas" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <TextField fx:id="txtNumMarchas" GridPane.columnIndex="1" GridPane.rowIndex="4" />
 
-        <CheckBox fx:id="chkFreioDisco" text="Tem Freio a Disco" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+        <Label text="Tem Freio a Disco:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+        <CheckBox fx:id="chkTemFreioDisco" GridPane.columnIndex="1" GridPane.rowIndex="5" />
     </GridPane>
 
     <HBox spacing="10" alignment="CENTER">
-        <Button text="Criar" onAction="#CriarOnAction" fx:id="btnCriar" />
-        <Button text="Cadastro" onAction="#CadastroOnAction" fx:id="btnCadastro" />
+        <Button fx:id="btnCriar" onAction="#CriarOnAction" text="Criar" />
+        <Button fx:id="btnAtualizar" onAction="#AtualizarOnAction" text="Atualizar" />
+        <Button fx:id="btnExcluir" onAction="#ExcluirOnAction" text="Excluir" />
+        <Button fx:id="btnListar" onAction="#ListarOnAction" text="Listar" />
     </HBox>
 
     <HBox spacing="10" alignment="CENTER">
@@ -41,5 +44,17 @@
         <Button text="Trocar Marcha" onAction="#TrocarMarchaOnAction" fx:id="btnTrocarMarcha" />
     </HBox>
 
-    <Button text="Voltar" onAction="#VoltarOnAction" fx:id="btnVoltar" />
+    <TableView fx:id="tblBicicletas" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colId" text="ID" prefWidth="50" />
+            <TableColumn fx:id="colMarca" text="Marca" prefWidth="150" />
+            <TableColumn fx:id="colModelo" text="Modelo" prefWidth="150" />
+            <TableColumn fx:id="colAno" text="Ano" prefWidth="80" />
+            <TableColumn fx:id="colPeso" text="Peso" prefWidth="80" />
+            <TableColumn fx:id="colNumMarchas" text="Nº Marchas" prefWidth="100" />
+            <TableColumn fx:id="colTemFreioDisco" text="Freio a Disco" prefWidth="100" />
+        </columns>
+    </TableView>
+
+    <Button fx:id="btnVoltar" text="Voltar" onAction="#VoltarOnAction" />
 </VBox> 

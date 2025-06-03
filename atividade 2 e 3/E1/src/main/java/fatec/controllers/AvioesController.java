@@ -1,18 +1,25 @@
 package fatec.controllers;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
 
 import fatec.classes.Aviao;
+import fatec.dao.AviaoDAO;
 import fatec.utils.mbox;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-public class AvioesController {
+public class AvioesController implements Initializable {
 
     @FXML
     private TextField txtMarca;
@@ -36,6 +43,15 @@ public class AvioesController {
     private Button btnCriar;
 
     @FXML
+    private Button btnAtualizar;
+
+    @FXML
+    private Button btnExcluir;
+
+    @FXML
+    private Button btnListar;
+
+    @FXML
     private Button btnAcelerar;
 
     @FXML
@@ -50,75 +66,175 @@ public class AvioesController {
     @FXML
     private Button btnVoltar;
 
-    private Aviao aviao;
+    @FXML
+    private TableView<Aviao> tblAvioes;
 
     @FXML
-    public void CriarOnAction() {
-        String marca = txtMarca.getText();
-        if (marca.isEmpty()) {
-            mbox.ShowMessageBox("Erro", "Marca não pode ser vazia!");
-            return;
-        }
+    private TableColumn<Aviao, Integer> colId;
 
-        String modelo = txtModelo.getText();
-        if (modelo.isEmpty()) {
-            mbox.ShowMessageBox("Erro", "Modelo não pode ser vazio!");
-            return;
-        }
+    @FXML
+    private TableColumn<Aviao, String> colMarca;
 
-        int ano;
+    @FXML
+    private TableColumn<Aviao, String> colModelo;
+
+    @FXML
+    private TableColumn<Aviao, Integer> colAno;
+
+    @FXML
+    private TableColumn<Aviao, Double> colPeso;
+
+    @FXML
+    private TableColumn<Aviao, Integer> colNumMotores;
+
+    @FXML
+    private TableColumn<Aviao, Double> colEnvergadura;
+
+    private AviaoDAO aviaoDAO;
+    private Aviao aviaoSelecionado;
+    private ObservableList<Aviao> avioesList;
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        aviaoDAO = new AviaoDAO();
+        avioesList = FXCollections.observableArrayList();
+        configurarTabela();
+        atualizarTabela();
+    }
+
+    private void configurarTabela() {
+        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colMarca.setCellValueFactory(new PropertyValueFactory<>("marca"));
+        colModelo.setCellValueFactory(new PropertyValueFactory<>("modelo"));
+        colAno.setCellValueFactory(new PropertyValueFactory<>("ano"));
+        colPeso.setCellValueFactory(new PropertyValueFactory<>("peso"));
+        colNumMotores.setCellValueFactory(new PropertyValueFactory<>("numMotores"));
+        colEnvergadura.setCellValueFactory(new PropertyValueFactory<>("envergadura"));
+
+        tblAvioes.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                aviaoSelecionado = newSelection;
+                preencherCampos(aviaoSelecionado);
+            }
+        });
+    }
+
+    private void preencherCampos(Aviao aviao) {
+        txtMarca.setText(aviao.getMarca());
+        txtModelo.setText(aviao.getModelo());
+        txtAno.setText(String.valueOf(aviao.getAno()));
+        txtPeso.setText(String.valueOf(aviao.getPeso()));
+        txtMotores.setText(String.valueOf(aviao.getNumMotores()));
+        txtEnvergadura.setText(String.valueOf(aviao.getEnvergadura()));
+    }
+
+    private void atualizarTabela() {
         try {
-            ano = Integer.parseInt(txtAno.getText());
-        } catch (NumberFormatException e) {
-            mbox.ShowMessageBox("Erro", "Ano inválido!");
-            return;
+            List<Aviao> avioes = aviaoDAO.listarTodos();
+            avioesList.clear();
+            avioesList.addAll(avioes);
+            tblAvioes.setItems(avioesList);
+        } catch (Exception e) {
+            mbox.ShowMessageBox("Erro", "Erro ao carregar aviões: " + e.getMessage());
         }
-
-        double peso;
-        try {
-            peso = Double.parseDouble(txtPeso.getText());
-        } catch (NumberFormatException e) {
-            mbox.ShowMessageBox("Erro", "Peso inválido!");
-            return;
-        }
-
-        int motores;
-        try {
-            motores = Integer.parseInt(txtMotores.getText());
-        } catch (NumberFormatException e) {
-            mbox.ShowMessageBox("Erro", "Número de motores inválido!");
-            return;
-        }
-
-        double envergadura;
-        try {
-            envergadura = Double.parseDouble(txtEnvergadura.getText());
-        } catch (NumberFormatException e) {
-            mbox.ShowMessageBox("Erro", "Envergadura inválida!");
-            return;
-        }
-
-        aviao = new Aviao(marca, modelo, ano, peso, motores, envergadura);
-
-        mbox.ShowMessageBox("Sucesso", "Avião criado!");
     }
 
     @FXML
-    private void CadastroOnAction() {
-        String message = "Marca: " + aviao.getMarca() +
-                "\nModelo: " + aviao.getModelo() +
-                "\nAno: " + aviao.getAno() +
-                "\nPeso: " + aviao.getPeso() +
-                "\nNúmero de motores: " + aviao.getNumeroMotores() +
-                "\nEnvergadura: " + aviao.getEnvergadura();
+    private void CriarOnAction() {
+        try {
+            String marca = txtMarca.getText();
+            String modelo = txtModelo.getText();
+            int ano = Integer.parseInt(txtAno.getText());
+            double peso = Double.parseDouble(txtPeso.getText());
+            int numMotores = Integer.parseInt(txtMotores.getText());
+            double envergadura = Double.parseDouble(txtEnvergadura.getText());
 
-        mbox.ShowMessageBox("Avião cadastrado", message);
+            if (marca.isEmpty() || modelo.isEmpty()) {
+                mbox.ShowMessageBox("Erro", "Por favor, preencha todos os campos obrigatórios.");
+                return;
+            }
+
+            Aviao novoAviao = new Aviao(marca, modelo, ano, peso, numMotores, envergadura);
+            aviaoDAO.inserir(novoAviao);
+            limparCampos();
+            atualizarTabela();
+            mbox.ShowMessageBox("Sucesso", "Avião cadastrado com sucesso!");
+        } catch (NumberFormatException e) {
+            mbox.ShowMessageBox("Erro", "Por favor, insira valores numéricos válidos para Ano, Peso, Número de Motores e Envergadura.");
+        } catch (Exception e) {
+            mbox.ShowMessageBox("Erro", "Erro ao cadastrar avião: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    private void AtualizarOnAction() {
+        if (aviaoSelecionado == null) {
+            mbox.ShowMessageBox("Erro", "Por favor, selecione um avião para atualizar.");
+            return;
+        }
+        try {
+            String marca = txtMarca.getText();
+            String modelo = txtModelo.getText();
+            int ano = Integer.parseInt(txtAno.getText());
+            double peso = Double.parseDouble(txtPeso.getText());
+            int numMotores = Integer.parseInt(txtMotores.getText());
+            double envergadura = Double.parseDouble(txtEnvergadura.getText());
+
+            if (marca.isEmpty() || modelo.isEmpty()) {
+                mbox.ShowMessageBox("Erro", "Por favor, preencha todos os campos obrigatórios.");
+                return;
+            }
+
+            aviaoSelecionado.setMarca(marca);
+            aviaoSelecionado.setModelo(modelo);
+            aviaoSelecionado.setAno(ano);
+            aviaoSelecionado.setPeso(peso);
+            aviaoSelecionado.setNumMotores(numMotores);
+            aviaoSelecionado.setEnvergadura(envergadura);
+
+            aviaoDAO.atualizar(aviaoSelecionado);
+            limparCampos();
+            atualizarTabela();
+            mbox.ShowMessageBox("Sucesso", "Avião atualizado com sucesso!");
+        } catch (NumberFormatException e) {
+            mbox.ShowMessageBox("Erro", "Por favor, insira valores numéricos válidos para Ano, Peso, Número de Motores e Envergadura.");
+        } catch (Exception e) {
+            mbox.ShowMessageBox("Erro", "Erro ao atualizar avião: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    private void ExcluirOnAction() {
+        if (aviaoSelecionado == null) {
+            mbox.ShowMessageBox("Erro", "Por favor, selecione um avião para excluir.");
+            return;
+        }
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmar Exclusão");
+        alert.setHeaderText("Excluir Avião");
+        alert.setContentText("Tem certeza que deseja excluir o avião " + aviaoSelecionado.getMarca() + " " + aviaoSelecionado.getModelo() + "?");
+
+        if (alert.showAndWait().get() == ButtonType.OK) {
+            try {
+                aviaoDAO.excluir(aviaoSelecionado.getId());
+                limparCampos();
+                atualizarTabela();
+                mbox.ShowMessageBox("Sucesso", "Avião excluído com sucesso!");
+            } catch (Exception e) {
+                mbox.ShowMessageBox("Erro", "Erro ao excluir avião: " + e.getMessage());
+            }
+        }
+    }
+
+    @FXML
+    private void ListarOnAction() {
+        atualizarTabela();
     }
 
     @FXML
     public void AcelerarOnAction() {
-        if (Verificar()) {
-            String title = aviao.Acelerar();
+        if (VerificarSelecionado()) {
+            String title = aviaoSelecionado.Acelerar();
             String gifPath = getClass().getResource("/fatec/gifs/aviao-acelerar.gif").toExternalForm();
             mbox.ShowGifMessageBox(title, gifPath);
         }
@@ -126,8 +242,8 @@ public class AvioesController {
 
     @FXML
     public void FrearOnAction() {
-        if (Verificar()) {
-            String title = aviao.Frear();
+        if (VerificarSelecionado()) {
+            String title = aviaoSelecionado.Frear();
             String gifPath = getClass().getResource("/fatec/gifs/aviao-frear.gif").toExternalForm();
             mbox.ShowGifMessageBox(title, gifPath);
         }
@@ -135,8 +251,8 @@ public class AvioesController {
 
     @FXML
     public void DecolarOnAction() {
-        if (Verificar()) {
-            String title = aviao.Decolar();
+        if (VerificarSelecionado()) {
+            String title = aviaoSelecionado.Decolar();
             String gifPath = getClass().getResource("/fatec/gifs/aviao-decolar.gif").toExternalForm();
             mbox.ShowGifMessageBox(title, gifPath);
         }
@@ -144,8 +260,8 @@ public class AvioesController {
 
     @FXML
     public void PousarOnAction() {
-        if (Verificar()) {
-            String title = aviao.Pousar();
+        if (VerificarSelecionado()) {
+            String title = aviaoSelecionado.Pousar();
             String gifPath = getClass().getResource("/fatec/gifs/aviao-pousar.gif").toExternalForm();
             mbox.ShowGifMessageBox(title, gifPath);
         }
@@ -159,11 +275,21 @@ public class AvioesController {
         stage.show();
     }
 
-    private boolean Verificar() {
-        if (aviao == null) {
-            mbox.ShowMessageBox("Erro", "Por favor, crie um avião primeiro.");
+    private boolean VerificarSelecionado() {
+        if (aviaoSelecionado == null) {
+            mbox.ShowMessageBox("Erro", "Por favor, selecione um avião primeiro na tabela.");
             return false;
         }
         return true;
+    }
+
+    private void limparCampos() {
+        txtMarca.clear();
+        txtModelo.clear();
+        txtAno.clear();
+        txtPeso.clear();
+        txtMotores.clear();
+        txtEnvergadura.clear();
+        aviaoSelecionado = null;
     }
 } 

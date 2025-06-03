@@ -1,21 +1,21 @@
 package fatec.classes;
 
 public class Bicicleta extends Veiculo {
-    private int numeroMarchas;
+    private int numMarchas;
     private boolean temFreioDisco;
 
-    public Bicicleta(String marca, String modelo, int ano, double peso, int numeroMarchas, boolean temFreioDisco) {
+    public Bicicleta(String marca, String modelo, int ano, double peso, int numMarchas, boolean temFreioDisco) {
         super(marca, modelo, ano, peso);
-        this.numeroMarchas = numeroMarchas;
+        this.numMarchas = numMarchas;
         this.temFreioDisco = temFreioDisco;
     }
 
-    public int getNumeroMarchas() {
-        return numeroMarchas;
+    public int getNumMarchas() {
+        return numMarchas;
     }
 
-    public void setNumeroMarchas(int numeroMarchas) {
-        this.numeroMarchas = numeroMarchas;
+    public void setNumMarchas(int numMarchas) {
+        this.numMarchas = numMarchas;
     }
 
     public boolean isTemFreioDisco() {

@@ -2,19 +2,19 @@ package fatec.classes;
 
 public class Moto extends Veiculo {
 
-    private boolean temCarenagem;
+    private int cilindrada;
 
-    public Moto(String marca, String modelo, int ano, double peso, boolean temCarenagem) {
+    public Moto(String marca, String modelo, int ano, double peso, int cilindrada) {
         super(marca, modelo, ano, peso);
-        this.temCarenagem = temCarenagem;
+        this.cilindrada = cilindrada;
     }
 
-    public boolean isTemCarenagem() {
-        return temCarenagem;
+    public int getCilindrada() {
+        return cilindrada;
     }
 
-    public void setTemCarenagem(boolean temCarenagem) {
-        this.temCarenagem = temCarenagem;
+    public void setCilindrada(int cilindrada) {
+        this.cilindrada = cilindrada;
     }
 
     @Override

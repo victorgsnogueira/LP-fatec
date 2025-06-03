@@ -2,19 +2,19 @@ package fatec.classes;
 
 public class Carro extends Veiculo {
 
-    private int quantidadePortas;
+    private int numPortas;
 
-    public Carro(String marca, String modelo, int ano, double peso, int quantidadePortas) {
+    public Carro(String marca, String modelo, int ano, double peso, int numPortas) {
         super(marca, modelo, ano, peso);
-        this.quantidadePortas = quantidadePortas;
+        this.numPortas = numPortas;
     }
 
-    public int getQuantidadePortas() {
-        return quantidadePortas;
+    public int getNumPortas() {
+        return numPortas;
     }
 
-    public void setQuantidadePortas(int quantidadePortas) {
-        this.quantidadePortas = quantidadePortas;
+    public void setNumPortas(int numPortas) {
+        this.numPortas = numPortas;
     }
 
     @Override

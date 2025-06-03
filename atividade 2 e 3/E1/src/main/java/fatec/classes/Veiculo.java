@@ -1,6 +1,7 @@
 package fatec.classes;
 
 public abstract class Veiculo {
+    private int id;
     private String marca;
     private String modelo;
     private int ano;
@@ -11,6 +12,14 @@ public abstract class Veiculo {
         this.modelo = modelo;
         this.ano = ano;
         this.peso = peso;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getMarca() {

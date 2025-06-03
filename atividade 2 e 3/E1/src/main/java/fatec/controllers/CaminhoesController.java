@@ -1,18 +1,25 @@
 package fatec.controllers;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
 
 import fatec.classes.Caminhao;
+import fatec.dao.CaminhaoDAO;
 import fatec.utils.mbox;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-public class CaminhoesController {
+public class CaminhoesController implements Initializable {
 
     @FXML
     private TextField txtMarca;
@@ -33,10 +40,19 @@ public class CaminhoesController {
     private Button btnCriar;
 
     @FXML
+    private Button btnAtualizar;
+
+    @FXML
+    private Button btnExcluir;
+
+    @FXML
+    private Button btnListar;
+
+    @FXML
     private Button btnAcelerar;
 
     @FXML
-    private Button btnFreiar;
+    private Button btnFrear;
 
     @FXML
     private Button btnCarregar;
@@ -44,72 +60,176 @@ public class CaminhoesController {
     @FXML
     private Button btnVoltar;
 
-    private Caminhao caminhao;
+    @FXML
+    private TableView<Caminhao> tblCaminhoes;
 
     @FXML
-    public void CriarOnAction() {
-        String marca = txtMarca.getText();
-        String modelo = txtModelo.getText();
+    private TableColumn<Caminhao, Integer> colId;
 
-        if (marca.isEmpty() || modelo.isEmpty()) {
-            mbox.ShowMessageBox("Erro", "Preencha todos os campos!");
-            return;
-        }
+    @FXML
+    private TableColumn<Caminhao, String> colMarca;
 
-        int ano;
+    @FXML
+    private TableColumn<Caminhao, String> colModelo;
+
+    @FXML
+    private TableColumn<Caminhao, Integer> colAno;
+
+    @FXML
+    private TableColumn<Caminhao, Double> colPeso;
+
+    @FXML
+    private TableColumn<Caminhao, Double> colCarga;
+
+    private CaminhaoDAO caminhaoDAO;
+    private Caminhao caminhaoSelecionado;
+    private ObservableList<Caminhao> caminhoesList;
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        caminhaoDAO = new CaminhaoDAO();
+        caminhoesList = FXCollections.observableArrayList();
+        configurarTabela();
+        atualizarTabela();
+    }
+
+    private void configurarTabela() {
+        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colMarca.setCellValueFactory(new PropertyValueFactory<>("marca"));
+        colModelo.setCellValueFactory(new PropertyValueFactory<>("modelo"));
+        colAno.setCellValueFactory(new PropertyValueFactory<>("ano"));
+        colPeso.setCellValueFactory(new PropertyValueFactory<>("peso"));
+        colCarga.setCellValueFactory(new PropertyValueFactory<>("capacidadeCarga")); // Assuming getter is getCapacidadeCarga
+
+        tblCaminhoes.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                caminhaoSelecionado = newSelection;
+                preencherCampos(caminhaoSelecionado);
+            }
+        });
+    }
+
+    private void preencherCampos(Caminhao caminhao) {
+        txtMarca.setText(caminhao.getMarca());
+        txtModelo.setText(caminhao.getModelo());
+        txtAno.setText(String.valueOf(caminhao.getAno()));
+        txtPeso.setText(String.valueOf(caminhao.getPeso()));
+        txtCarga.setText(String.valueOf(caminhao.getCapacidadeCarga()));
+    }
+
+    private void atualizarTabela() {
         try {
-            ano = Integer.parseInt(txtAno.getText());
-        } catch (NumberFormatException e) {
-            mbox.ShowMessageBox("Erro", "Ano inválido!");
-            return;
+            List<Caminhao> caminhoes = caminhaoDAO.listarTodos();
+            caminhoesList.clear();
+            caminhoesList.addAll(caminhoes);
+            tblCaminhoes.setItems(caminhoesList);
+        } catch (Exception e) {
+            mbox.ShowMessageBox("Erro", "Erro ao carregar caminhões: " + e.getMessage());
         }
-
-        double peso;
-        try {
-            peso = Double.parseDouble(txtPeso.getText());
-        } catch (NumberFormatException e) {
-            mbox.ShowMessageBox("Erro", "Peso inválido!");
-            return;
-        }
-
-        double carga;
-        try {
-            carga = Double.parseDouble(txtCarga.getText());
-        } catch (NumberFormatException e) {
-            mbox.ShowMessageBox("Erro", "Capacidade de carga inválida!");
-            return;
-        }
-
-        caminhao = new Caminhao(marca, modelo, ano, peso, carga);
-        mbox.ShowMessageBox("Sucesso", "Caminhão criado com sucesso!");
     }
 
     @FXML
-private void CadastroOnAction() {
-    String message = "Marca: " + caminhao.getMarca() +
-                     "\nModelo: " + caminhao.getModelo() +
-                     "\nAno: " + caminhao.getAno() +
-                     "\nPeso: " + caminhao.getPeso() +
-                     "\nCapacidade de Carga: " + caminhao.getCapacidadeCarga();
+    private void CriarOnAction() {
+        try {
+            String marca = txtMarca.getText();
+            String modelo = txtModelo.getText();
+            int ano = Integer.parseInt(txtAno.getText());
+            double peso = Double.parseDouble(txtPeso.getText());
+            double carga = Double.parseDouble(txtCarga.getText());
 
-    mbox.ShowMessageBox("Caminhão cadastrado", message);
-}
+            if (marca.isEmpty() || modelo.isEmpty()) {
+                mbox.ShowMessageBox("Erro", "Por favor, preencha todos os campos obrigatórios.");
+                return;
+            }
 
+            Caminhao novoCaminhao = new Caminhao(marca, modelo, ano, peso, carga);
+            caminhaoDAO.inserir(novoCaminhao);
+            limparCampos();
+            atualizarTabela();
+            mbox.ShowMessageBox("Sucesso", "Caminhão cadastrado com sucesso!");
+        } catch (NumberFormatException e) {
+            mbox.ShowMessageBox("Erro", "Por favor, insira valores numéricos válidos para Ano, Peso e Capacidade de Carga.");
+        } catch (Exception e) {
+            mbox.ShowMessageBox("Erro", "Erro ao cadastrar caminhão: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    private void AtualizarOnAction() {
+        if (caminhaoSelecionado == null) {
+            mbox.ShowMessageBox("Erro", "Por favor, selecione um caminhão para atualizar.");
+            return;
+        }
+        try {
+            String marca = txtMarca.getText();
+            String modelo = txtModelo.getText();
+            int ano = Integer.parseInt(txtAno.getText());
+            double peso = Double.parseDouble(txtPeso.getText());
+            double carga = Double.parseDouble(txtCarga.getText());
+
+            if (marca.isEmpty() || modelo.isEmpty()) {
+                mbox.ShowMessageBox("Erro", "Por favor, preencha todos os campos obrigatórios.");
+                return;
+            }
+
+            caminhaoSelecionado.setMarca(marca);
+            caminhaoSelecionado.setModelo(modelo);
+            caminhaoSelecionado.setAno(ano);
+            caminhaoSelecionado.setPeso(peso);
+            caminhaoSelecionado.setCapacidadeCarga(carga);
+
+            caminhaoDAO.atualizar(caminhaoSelecionado);
+            limparCampos();
+            atualizarTabela();
+            mbox.ShowMessageBox("Sucesso", "Caminhão atualizado com sucesso!");
+        } catch (NumberFormatException e) {
+            mbox.ShowMessageBox("Erro", "Por favor, insira valores numéricos válidos para Ano, Peso e Capacidade de Carga.");
+        } catch (Exception e) {
+            mbox.ShowMessageBox("Erro", "Erro ao atualizar caminhão: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    private void ExcluirOnAction() {
+        if (caminhaoSelecionado == null) {
+            mbox.ShowMessageBox("Erro", "Por favor, selecione um caminhão para excluir.");
+            return;
+        }
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmar Exclusão");
+        alert.setHeaderText("Excluir Caminhão");
+        alert.setContentText("Tem certeza que deseja excluir o caminhão " + caminhaoSelecionado.getMarca() + " " + caminhaoSelecionado.getModelo() + "?");
+
+        if (alert.showAndWait().get() == ButtonType.OK) {
+            try {
+                caminhaoDAO.excluir(caminhaoSelecionado.getId());
+                limparCampos();
+                atualizarTabela();
+                mbox.ShowMessageBox("Sucesso", "Caminhão excluído com sucesso!");
+            } catch (Exception e) {
+                mbox.ShowMessageBox("Erro", "Erro ao excluir caminhão: " + e.getMessage());
+            }
+        }
+    }
+
+    @FXML
+    private void ListarOnAction() {
+        atualizarTabela();
+    }
 
     @FXML
     public void AcelerarOnAction() {
-        if (Verificar()) {
-            String title = caminhao.Acelerar();
+        if (VerificarSelecionado()) {
+            String title = caminhaoSelecionado.Acelerar();
             String gifPath = getClass().getResource("/fatec/gifs/caminhao-acelerar.gif").toExternalForm();
-
             mbox.ShowGifMessageBox(title, gifPath);
         }
     }
 
     @FXML
     public void FrearOnAction() {
-        if (Verificar()) {
-            String title = caminhao.Frear();
+        if (VerificarSelecionado()) {
+            String title = caminhaoSelecionado.Frear();
             String gifPath = getClass().getResource("/fatec/gifs/caminhao-frear.gif").toExternalForm();
             mbox.ShowGifMessageBox(title, gifPath);
         }
@@ -117,8 +237,8 @@ private void CadastroOnAction() {
 
     @FXML
     public void CarregarOnAction() {
-        if (Verificar()) {
-            String title = caminhao.Carregar();
+        if (VerificarSelecionado()) {
+            String title = caminhaoSelecionado.Carregar();
             String gifPath = getClass().getResource("/fatec/gifs/caminhao-carregar.gif").toExternalForm();
             mbox.ShowGifMessageBox(title, gifPath);
         }
@@ -132,11 +252,20 @@ private void CadastroOnAction() {
         stage.show();
     }
 
-    private boolean Verificar() {
-        if (caminhao == null) {
-            mbox.ShowMessageBox("Erro", "Por favor, crie um caminhão primeiro.");
+    private boolean VerificarSelecionado() {
+        if (caminhaoSelecionado == null) {
+            mbox.ShowMessageBox("Erro", "Por favor, selecione um caminhão primeiro na tabela.");
             return false;
         }
         return true;
+    }
+
+    private void limparCampos() {
+        txtMarca.clear();
+        txtModelo.clear();
+        txtAno.clear();
+        txtPeso.clear();
+        txtCarga.clear();
+        caminhaoSelecionado = null;
     }
 }

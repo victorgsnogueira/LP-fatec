@@ -24,12 +24,14 @@
         <Label text="Tipo de Pele:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
         <TextField fx:id="txtTipoPele" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
-        <CheckBox fx:id="chkEscamas" text="Tem Escamas" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <CheckBox fx:id="chkTemEscamas" text="Tem Escamas" GridPane.columnIndex="1" GridPane.rowIndex="4" />
     </GridPane>
 
     <HBox spacing="10" alignment="CENTER">
         <Button text="Criar" onAction="#CriarOnAction" fx:id="btnCriar" />
-        <Button text="Cadastro" onAction="#CadastroOnAction" fx:id="btnCadastro" />
+        <Button text="Atualizar" onAction="#AtualizarOnAction" fx:id="btnAtualizar" />
+        <Button text="Excluir" onAction="#ExcluirOnAction" fx:id="btnExcluir" />
+        <Button text="Listar" onAction="#ListarOnAction" fx:id="btnListar" />
     </HBox>
 
     <HBox spacing="10" alignment="CENTER">
@@ -37,6 +39,17 @@
         <Button text="Trocar Pele" onAction="#TrocarPeleOnAction" fx:id="btnTrocarPele" />
         <Button text="Tomar Sol" onAction="#TomarSolOnAction" fx:id="btnTomarSol" />
     </HBox>
+
+    <TableView fx:id="tblRepteis" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colId" text="ID" prefWidth="50" />
+            <TableColumn fx:id="colNome" text="Nome" prefWidth="150" />
+            <TableColumn fx:id="colIdade" text="Idade" prefWidth="100" />
+            <TableColumn fx:id="colPeso" text="Peso" prefWidth="100" />
+            <TableColumn fx:id="colTemEscamas" text="Tem Escamas" prefWidth="100" />
+            <TableColumn fx:id="colTipoPele" text="Tipo de Pele" prefWidth="150" />
+        </columns>
+    </TableView>
 
     <Button text="Voltar" onAction="#VoltarOnAction" fx:id="btnVoltar" />
 </VBox> 

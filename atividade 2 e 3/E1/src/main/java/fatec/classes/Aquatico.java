@@ -1,19 +1,19 @@
 package fatec.classes;
 
 public class Aquatico extends Animal {
-    private boolean viveEmAguasSalgadas;
+    private double profundidadeMaxima;
 
-    public Aquatico(String nome, int idade, double peso, boolean viveEmAguasSalgadas) {
+    public Aquatico(String nome, int idade, double peso, double profundidadeMaxima) {
         super(nome, idade, peso);
-        this.viveEmAguasSalgadas = viveEmAguasSalgadas;
+        this.profundidadeMaxima = profundidadeMaxima;
     }
 
-    public boolean isViveEmAguasSalgadas() {
-        return viveEmAguasSalgadas;
+    public double getProfundidadeMaxima() {
+        return profundidadeMaxima;
     }
 
-    public void setViveEmAguasSalgadas(boolean viveEmAguasSalgadas) {
-        this.viveEmAguasSalgadas = viveEmAguasSalgadas;
+    public void setProfundidadeMaxima(double profundidadeMaxima) {
+        this.profundidadeMaxima = profundidadeMaxima;
     }
 
     @Override
